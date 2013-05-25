@@ -1,6 +1,7 @@
 var cur_bracelet_code = '';
 var serverURL = 'http://fatbraindev.somee.com/DeviceGateway.aspx';
 var browser  = 'no';
+//var browser  = 'no';
 var deviceLanguage = '';
 var deviceNationality = '';
 
