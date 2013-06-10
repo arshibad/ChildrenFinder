@@ -396,3 +396,12 @@ width:100%;
     box-shadow: 3px 4px 1px #000000;
     text-shadow: 0 0px 0 #fff;
 }
+
+.flag{
+left:10px !important;
+right:0px !important;
+}
+
+#childnation-menu .ui-btn-text{
+  padding-left:15px;
+}

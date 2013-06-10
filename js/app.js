@@ -1,7 +1,7 @@
 var cur_bracelet_code = '';
 var serverURL = 'http://fatbraindev.somee.com/DeviceGateway.aspx';
-var browser  = 'no';
-//var browser  = 'no';
+var browser  = 'yes';
+
 var deviceLanguage = '';
 var deviceNationality = '';
 
@@ -9,6 +9,9 @@ $(document).bind('pageinit', function (event) {
  	i18n.init({ debug: true, resStore: resources }, function () {
         $(".i18n").i18n();
     });
+   
+    
+
 	
 	$('.readqrcode').bind('click',function(){
 		if(browser == 'no'){
@@ -45,12 +48,14 @@ $(document).bind('pageinit', function (event) {
 	}
   
   
-	
+
 	/*$('#submitpassword').on('click',function(){
 		console.log("as");
 		;
 	});*/
 });
+
+
 
 var app = {
     // Application Constructor
@@ -164,24 +169,61 @@ function changepage(page){
 
 function loadnationalityJson(){
 	var html = '';
-	for(i=0;i<nationality.length;i++){
-		html+='<option value="'+nationality[i]+'">'+nationality[i]+'</option>';
+  var html2 = '';
+  for(i=0;i<nationality.length;i++){
+		//html+='<option value="'+nationality[i][0]+'">'+nationality[i][1]+'</option>';
+    if (nationality[i][0]!= undefined){
+    html+='<option value="'+nationality[i][0]+'#'+nationality[i][2]+'" data-image="images/flags-pack/flag_'+nationality[i][0].toLowerCase()+'.png" data-imagecss="flag '+nationality[i][0]+'" data-title="'+nationality[i][1]+'"><img src="images/flags-pack/flag_'+nationality[i][0].toLowerCase()+'.png">'+nationality[i][1]+'</option>';
+    html2+='<option value="'+nationality[i][2]+'">'+'+'+nationality[i][2]+'</option>';
+    }
+
 	}
-	$('#childnation').html(html);
-	
-	var html1 = '';
-	for (x in languages)
-	{
-		 html1+='<option value="'+languages[x]+'">'+languages[x]+'</option>';
+	 $('#childnation').html(html);
+   $('#childnation').selectmenu('refresh');
+   $('#childnation').find('option').each(function(index, element){
+        if ($(element).attr('data-image') != undefined) {
+            $('#childnation-menu').children().eq(index).find('.ui-btn-inner').append('<span class="ui-icon flag"><img src="'+$(element).attr('data-image')+'"></span>');
+        }
+   })
+   
+  var html1 = '';
+  var html3 = '';
+  html3+='<option value=""></option>';
+	for(x=0;x<languages.length;x++){
+		 html1+='<option value="'+languages[x][0]+'">'+languages[x][1]+'</option>';
+     html3+='<option value="'+languages[x][0]+'">'+languages[x][1]+'</option>';
 	}
+  
+  
+  $('#parent1phone_ext').html(html2);
+  $('#parent2phone_ext').html(html2);
 	$('#childlang1').html(html1);
-  $('#childlang2').html(html1);
+  $('#childlang2').html(html3);
+}
+
+function loadnation(val){
+  var phArr =val.split("#");
+  var ph = phArr[1];
+  if($('#parent1phone').val() == ''){
+    $('#parent1phone_ext option:selected').attr('selected','');
+    $('#parent1phone_ext option:contains("+'+ph+'")').prop('selected', true);
+    $('#parent1phone_ext').selectmenu('refresh');
+  }
+  
+  if($('#parent2phone').val() == ''){
+    $('#parent2phone_ext option:selected').attr('selected','');
+    $('#parent2phone_ext option:contains("+'+ph+'")').prop('selected', true);
+    $('#parent2phone_ext').selectmenu('refresh');
+  }
+  
 }
 
 
 function registerNewBracelet(){
 	$.mobile.loading('show');
-	var sdata = {childname:$('#childname').val(),childsurname:$('#childsurname').val(),childnation:$('#childnation').val(),childlang1:$('#childlang1').val(),childlang2:$('#childlang2').val(),parent1name:$('#parent1name').val(),parent1surname:$('#parent1surname').val(),parent1phone:$('#parent1phone').val(),parent2name:$('#parent2name').val(),parent2surname:$('#parent2surname').val(),parent2phone:$('#parent2phone').val(),accom:$('#accom').val(),allergies:$('#allergies').val(),blood:$('#blood').val(),medical:$('#medical').val(),message:$('#message').val(),deleteafter:""};
+  var phArr =val.split("#");
+  var nationality = phArr[0];
+	var sdata = {childname:$('#childname').val(),childsurname:$('#childsurname').val(),childnation:nationality,childlang1:$('#childlang1').val(),childlang2:$('#childlang2').val(),parent1name:$('#parent1name').val(),parent1surname:$('#parent1surname').val(),parent1phone:$('#parent1phone').val(),parent2name:$('#parent2name').val(),parent2surname:$('#parent2surname').val(),parent2phone:$('#parent2phone').val(),accom:$('#accom').val(),allergies:$('#allergies').val(),blood:$('#blood').val(),medical:$('#medical').val(),message:$('#message').val(),deleteafter:""};
 	sdata = JSON.stringify(sdata);
 	$.ajax({
        type: "POST",
@@ -209,3 +251,4 @@ function registerNewBracelet(){
 		 }
    });
 }
+
