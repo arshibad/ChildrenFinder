@@ -1,8 +1,8 @@
 var resources = {
     dev: {
         example: {
-            "text1": "Sample",
-            "text2": "Project",
+            "text1": "Children",
+            "text2": "Finder",
             "text3": "New <br />Bracelet",
             "text4": "Registration",
             "text5": "Bracelet",
@@ -64,8 +64,8 @@ var resources = {
     },
     en: {
         example: {
-            "text1": "Sample",
-            "text2": "Project",
+            "text1": "Children",
+            "text2": "Finder",
             "text3": "New <br />Bracelet",
             "text4": "Registration",
             "text5": "Bracelet",

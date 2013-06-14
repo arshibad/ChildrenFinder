@@ -1,11 +1,12 @@
 var cur_bracelet_code = '';
 var url = "http://fatbraindev.somee.com/DeviceGateway.aspx";
 var website = 'http://fatbraindev.somee.com/';
-url = encodeURIComponent(url);
+//url = encodeURIComponent(url);
 
 var browser  = 'no';
 
 if(browser == 'yes'){
+	url = encodeURIComponent(url);
 	var serverURL = 'test.php?callback=callback&url='+url;	
 }else{
 	var serverURL = url;	
@@ -25,9 +26,11 @@ $(document).ready(function(){
 	});
 	
 	$('.readqrcode').bind('click',function(){
+		alert("Heee"+browser);
 		if(browser == 'no'){
+			alert("Heee");
 			window.plugins.barcodeScanner.scan( function(result) {
-					//alert("We got a barcode\n" +"Result: " + result.text + "\n" +"Format: " + result.format + "\n" +"Cancelled: " + result.cancelled);
+					alert("We got a barcode\n" +"Result: " + result.text + "\n" +"Format: " + result.format + "\n" +"Cancelled: " + result.cancelled);
 					getBarCodedetails(result.text);
 					
 			  }, function(error) {
@@ -40,7 +43,9 @@ $(document).ready(function(){
 	
 	
 	$('.readqrcode_identify').bind('click',function(){
+		alert("Heeer"+browser);
 		if(browser == 'no'){
+			alert("Heeer");
 			window.plugins.barcodeScanner.scan( function(result) {
 					//alert("We got a barcode\n" +"Result: " + result.text + "\n" +"Format: " + result.format + "\n" +"Cancelled: " + result.cancelled);
 					qrcode_identify(result.text);
