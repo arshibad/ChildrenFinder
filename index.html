@@ -12,14 +12,17 @@
     <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
     <script type="text/javascript" src="js/i18next-1.6.0.min.js"></script>
     <script type="text/javascript" src="js/translation.js"></script>
+	 <script type="text/javascript" src="js/sqllitedb.js"></script>
+	 
 	 <script src="barcodescanner.js"></script>
+	 <script src="childbrowser.js"></script>
 	 <script type="text/javascript" src="js/nationality.js"></script>
 	 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJzi2ySpD4OQ3DiFXB7eWGlKCcrmaT0N0&sensor=false"></script>
     <script type="text/javascript" src="js/app.js"></script>
 
 </head>
 <body>
-    <div data-role="page">
+    <div data-role="page" id="home">
 		  <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
 				 <div class="homecontent">
@@ -47,8 +50,22 @@
 				 <div class="homecontent">
 					 <div class="content_header"><span class="i18n text1" data-i18n="[html]example:text8"></span> <span class="i18n text2" data-i18n="[html]example:text4"></span></div>
 					 <div class="content_content"><span class="i18n" data-i18n="[html]example:text7"></span></div>
-					 <a href="#typenumber"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text9"></span><br/><span class="i18n text2" data-i18n="[html]example:text10"></span></div></a><br/>
-					 <a href="#" class="readqrcode"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text11"></span><br/><span class="i18n text2" data-i18n="[html]example:text12"></span></div></a>
+					 <a href="#typenumber_identify"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text9"></span><br/><span class="i18n text2" data-i18n="[html]example:text10"></span></div></a><br/>
+					 <a href="#" class="readqrcode_identify"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text11"></span><br/><span class="i18n text2" data-i18n="[html]example:text12"></span></div></a>
+				 </div>
+		  </div>
+    </div>
+	 
+	 <div data-role="page" id="typenumber_identify">
+		  <div data-role="content" id="maincontent1">
+				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
+				 <div class="homecontent">
+					 <div class="content_header"><span class="i18n text1" data-i18n="[html]example:text8"></span> <span class="i18n text2" data-i18n="[html]example:text4"></span></div>
+					 <div class="content_content"><span class="i18n" data-i18n="[html]example:text13"></span></div>
+					 
+						  <input type="number" name="bracelet_numeric_code" id="bracelet_numeric_code" value="">
+						  <a href="javascript:void(0);" onclick="enterNumber_identify()" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true"><span class="i18n" data-i18n="[html]example:text14"></span></a>
+					 
 				 </div>
 		  </div>
     </div>
@@ -80,7 +97,7 @@
 		  </div>
     </div>
 	 
-	 <div data-role="page" id="fillInfo" class="formbackground">
+	 <div data-role="page" id="fillInfo" class="formbackground" style="width: 100% !important;">
 		  <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
 				 <div class="homecontent">
@@ -207,62 +224,62 @@
 		  </div>
     </div>
 	 
-	 <div data-role="page" id="Infoview" class="formbackground">
+	 <div data-role="page" id="Infoview" class="formbackground" style="width: 100% !important;">
 		  <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
-				 <div class="homecontent">
+				 <div class="homecontent" style="padding-left:20px;">
 					 <div class="content_header"><span class="i18n text1" data-i18n="[html]example:text8"></span> <span class="i18n text2" data-i18n="[html]example:text4"></span></div>
 					 <div class="content_header"><span class="i18n" data-i18n="[html]example:text28"></span></div>
 					 	  
 						  <div class="infofields">
 								<div class="label"><span class="i18n" data-i18n="[html]example:text19"></span></div>
-								<div class="value"><span>John</span></div>
+								<div class="value"><span id="info_childname">John</span></div>
 						  </div>
 						  <div class="infofields">
 								<div class="label"><span class="i18n" data-i18n="[html]example:text20"></span></div>
-								<div class="value"><span>John</span></div>
+								<div class="value"><span id="info_childsurname">John</span></div>
 						  </div>
 						  <div class="infofields">
 								<div class="label"><span class="i18n" data-i18n="[html]example:text21"></span></div>
-								<div class="value"><span>French</span></div>
+								<div class="value"><span id="info_childnation">French</span></div>
 						  </div>
 						  <div class="infofields">
 								<div class="label"><span class="i18n" data-i18n="[html]example:text22"></span></div>
-								<div class="value"><span>English</span></div>
+								<div class="value"><span id="info_childlang1">English</span></div>
 						  </div>
 						  <div class="infofields">
 								<div class="phoneicon"><img src="images/phoneicon.png"></div>
 								<div class="label"><span class="i18n" data-i18n="[html]example:text23"></span></div>
-								<div class="value"><span>+39 3783783822</span></div>
-								<a href="tel:+393783783822"><div class="callicon"><span class="i18n" data-i18n="[html]example:text27"></span></div></a>
+								<div class="value"><span id="info_parent1phone">+39 3783783822</span></div>
+								<a href="tel:+393783783822" id="info_parent1phone_url"><div class="callicon"><span class="i18n" data-i18n="[html]example:text27"></span></div></a>
 						  </div>
 						  <div class="infofields">
 								<div class="phoneicon"><img src="images/phoneicon.png"></div>
 								<div class="label"><span class="i18n" data-i18n="[html]example:text24"></span></div>
-								<div class="value"><span>+39 3783733222</span></div>
-								<a href="tel:+393783783822"><div class="callicon"><span class="i18n" data-i18n="[html]example:text27"></span></div></a>
+								<div class="value"><span id="info_parent2phone">+39 3783733222</span></div>
+								<a href="tel:+393783783822" id="info_parent2phone_url"><div class="callicon"><span class="i18n" data-i18n="[html]example:text27"></span></div></a>
 						  </div>
 						  <div class="infofields">
 								<div class="label"><span class="i18n" data-i18n="[html]example:text28"></span></div>
-								<a href="javascript:initializemap('41.890042','12.492421');"><div class="value"><span>Show on map</span></div></a>
+								<a href="javascript:initializemap('41.890042','12.492421');" id="info_map"><div class="value"><span>Show on map</span></div></a>
 						  </div>
 						  <div class="infofields" style="height:auto;padding-bottom:10px;">
 								<div class="label textarealebel"><span class="i18n" data-i18n="[html]example:text25"></span></div>
-								<div class="value textarea"><span>Lorem ipsum dolor sit amet</span></div>
+								<div class="value textarea"><span id="info_accom">Lorem ipsum dolor sit amet</span></div>
 						  </div>
 						  <div class="infofields" style="height:auto;padding-bottom:10px;">
 								<div class="label textarealebel"><span class="i18n" data-i18n="[html]example:text26"></span></div>
-								<div class="value textarea"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span></div>
+								<div class="value textarea"><span id="info_medical">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span></div>
 						  </div>
 						  
 				 </div>
 		  </div>
 		  <div data-role="footer" data-position="fixed">
-				<div class="bottom_button" align="center"><a href="#registeredBracelet" data-role="button"><span class="i18n" data-i18n="[html]example:text17"></span></a></div>
+				<div class="bottom_button" align="center"><a href="#" onclick="registeredBreacelet()" data-role="button"><span class="i18n" data-i18n="[html]example:text58"></span></a></div>
 		  </div>
     </div>
 	 
-	 <div data-role="page" id="showmap" class="formbackground">
+	 <div data-role="page" id="showmap" class="formbackground" style="width: 100% !important;">
 		  <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
 				 <div class="homecontent">
@@ -279,11 +296,12 @@
 		  </div>
     </div>
 	 
-	 <div data-role="page" id="registeredBracelet" class="formbackground">
+	 <div data-role="page" id="registeredBracelet" class="formbackground" style="width: 100% !important;">
 		  <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
 				 <div class="homecontent">
 					 <div class="content_header"><span class="i18n text1" data-i18n="[html]example:text33"></span></div>
+					 <div id="registered_list">
 					 	  <a href="#deleteBracelet" class="blackhref">
 						  <div class="listfields">
 								<div class="label">Luca's bracelet</div>
@@ -296,6 +314,7 @@
 								<div class="value"><span>>></span></div>
 						  </div>
 						  </a>
+					 </div>	  
 				 </div>
 				 
 		  </div>
@@ -308,7 +327,7 @@
 		  </div>
     </div>
 	  
-	 <div data-role="page" id="deleteBracelet" class="formbackground">
+	 <div data-role="page" id="deleteBracelet" class="formbackground" style="width: 100% !important;">
 		  <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
 				 <div class="homecontent">
@@ -319,7 +338,7 @@
 						  </div>
 						  <div class="infofields" style="height:auto;padding-bottom:10px;">
 								<div class="label textarea">John's bracelet</div>
-								<div class="value textarealebel"><span>( code: 123456 )</span></div>
+								<div class="value textarealebel"><span>( code: <span id="delete_bracelet_id"></span> )</span></div>
 						  </div>
 						  <div class="infofields" style="height:auto;padding-bottom:10px;">
 								<div class="label textarealebel"><span class="i18n" data-i18n="[html]example:text36"></span></div>
@@ -330,29 +349,29 @@
 		  </div>
 		  <div data-role="footer" data-position="fixed">
 				<div class="listbuttons">
-						  <a href="#newregistration"><div class="buttonsgreen"><span></span> <span class="i18n text1" data-i18n="[html]example:text37"></span></div></a>
-						  <a href="#braceletidentification"><div class="buttonsred"><span></span><span class="i18n" data-i18n="[html]example:text38"></span></div></a>
+						  <a href="javascript:void(0);" onclick="deleteBreaceletPermanent();"><div class="buttonsgreen"><span></span> <span class="i18n text1" data-i18n="[html]example:text37"></span></div></a>
+						  <a href="javascript:void(0);" onclick="registeredBreacelet();"><div class="buttonsred"><span></span><span class="i18n" data-i18n="[html]example:text38"></span></div></a>
 				 </div>
 		  </div>
     </div>
 	 
-	 <div data-role="page" id="children_finder" class="formbackground">
+	 <div data-role="page" id="children_finder" class="formbackground" style="width: 100% !important;">
 		  <div data-role="content" id="children_finder_content">
 		    <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span><span></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
 				    <div class="homecontent">
 					 <div class="content_header"><span class="i18n text1" data-i18n="[html]example:text56"></span></div>
-					    <a href="#update_message_main"><div class="homebox"><span></span><span class="i18n text1" data-i18n="[html]example:52"></span></div></a>
-					    <a href="#update_position_main"><div class="homebox"><span></span> <span class="i18n text1" data-i18n="[html]example:53"></span></div></a>
-					    <a href="#edit_detail"><div class="homebox"><span></span> <span class="i18n text1" data-i18n="[html]example:54"></span></div></a>
-					    <a href="#deleteBracelet"><div class="homebox"><span></span> <span class="i18n text1" data-i18n="[html]example:55"></span></div></a>						  
+					    <a href="javascript:void(0);" onclick="editmessage();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text52"></span></div></a>
+					    <a href="javascript:void(0);" onclick="editposition();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text53"></span></div></a>
+					    <a href="javascript:void(0);" onclick="editDetail();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text54"></span></div></a>
+					    <a href="javascript:void(0);" onclick="deletebraclet();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text55"></span></div></a>						  
 					 </div>		 
 		    </div>  
 		 </div>
 				 
 	 </div>
 	 
-	 <div data-role="page" id="update_message_main" class="formbackground">
+	 <div data-role="page" id="update_message_main" class="formbackground" style="width: 100% !important;">
 		  <div data-role="content" id="update_message_content">
 		    <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
@@ -365,10 +384,10 @@
 		    </div>  
 		 </div>
 		 <div data-role="footer" data-position="fixed">
-				<div class="bottom_button" align="center"><a href="#Infoview" data-role="button"><span class="i18n" data-i18n="[html]example:text17"></span></a></div>
+				<div class="bottom_button" align="center"><a href="javascript:void(0);" onclick="updateMessage();" data-role="button"><span class="i18n" data-i18n="[html]example:text59"></span></a></div>
 		  </div>		 
 	 </div>
-	 <div data-role="page" id="update_position_main" class="formbackground">
+	 <div data-role="page" id="update_position_main" class="formbackground" style="width: 100% !important;">
 		  <div data-role="content" id="update_position_content">
 		    <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
@@ -381,114 +400,133 @@
 		    </div>  
 		 </div>
 		 <div data-role="footer" data-position="fixed">
-				<div class="bottom_button" align="center"><a href="#Infoview" data-role="button"><span class="i18n" data-i18n="[html]example:text17"></span></a></div>
+				<div class="bottom_button" align="center"><a href="javascript:void(0);" onclick="updatePosition();" data-role="button"><span class="i18n" data-i18n="[html]example:text59"></span></a></div>
 		  </div>		 
 	 </div>
-	 <div data-role="page" id="edit_detail" class="formbackground">
+	 <div data-role="page" id="edit_detail" class="formbackground" style="width: 100% !important;">
 		  <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
 				 <div class="homecontent">
 					 <div class="content_header"><span class="i18n text1" data-i18n="[html]example:text54"></span><span>-</span> <span class="i18n text2" data-i18n="[html]example:text5"></span></div>
-					 <div class="content_header"><span class="i18n" data-i18n="[html]example:text16"></span></div>
+					 <div class="content_header"><span class="i18n" data-i18n="[html]example:text16"></span>: <span id="edit_bracelet_id"></span></div>
 					 	  <div class="legend"><span class="i18n" data-i18n="[html]example:text18"></span></div>
 						  <div class="formfields">
-								<label for="first_name"><span class="i18n" data-i18n="[html]example:text19"></span></label>
-								<input type="text" name="first_name" id="first_name" value="" >
+								<label for="edit_childname"><span class="i18n" data-i18n="[html]example:text19"></span></label>
+								<input type="text" name="childname" id="edit_childname" value="" >
 						  </div>
 						  <div class="formfields">
-								<label for="sur_name"><span class="i18n" data-i18n="[html]example:text20"></span></label>
-								<input type="text" name="sur_name" id="sur_name" value="">
+								<label for="edit_childsurname"><span class="i18n" data-i18n="[html]example:text20"></span></label>
+								<input type="text" name="childsurname" id="edit_childsurname" value="">
 						  </div>
 						  <div class="formfields">
-								<label for="nationality"><span class="i18n" data-i18n="[html]example:text21"></span></label>
-								<select name="nationality" id="nationality">
+								<label for="edit_childnation"><span class="i18n" data-i18n="[html]example:text21"></span></label>
+								<select name="childnation" id="edit_childnation" onchange="loadnation_edit(this.value);" style="width:100%;" data-native-menu="false">
 									 <option value="French">Germany</option>
 									 <option value="German">German</option>
 									 <option value="UK">UK</option>
 								</select>
 						  </div>
 						  <div class="formfields">
-								<label for="languages"><span class="i18n" data-i18n="[html]example:text22"></span></label>
-								<select name="languages" id="languages">
+								<label for="edit_childlang1"><span class="i18n" data-i18n="[html]example:text22"></span></label>
+								<select name="childlang1" id="edit_childlang1">
+									 <option value="English">English</option>
+									 <option value="Spanish">Spanish</option>
+									 <option value="French">French</option>
+								</select>
+						  </div>
+						  <div class="formfields">
+								<label for="edit_childlang2"><span class="i18n" data-i18n="[html]example:text57"></span></label>
+								<select name="childlang2" id="edit_childlang2">
 									 <option value="English">English</option>
 									 <option value="Spanish">Spanish</option>
 									 <option value="French">French</option>
 								</select>
 						  </div>					
 						  <div class="formfields">
-								<label for="parent_1_name"><span class="i18n" data-i18n="[html]example:text39"></span></label>
-								<input type="text" name="parent_1_pame" id="parent_1_name" value="">
+								<label for="edit_parent1name"><span class="i18n" data-i18n="[html]example:text39"></span></label>
+								<input type="text" name="parent1name" id="edit_parent1name" value="">
 						  </div>
 						  <div class="formfields">
-								<label for="parent_1_surname"><span class="i18n" data-i18n="[html]example:text40"></span></label>
-								<input type="text" name="parent_1_surname" id="parent_1_surname" value="">
+								<label for="edit_parent1surname"><span class="i18n" data-i18n="[html]example:text40"></span></label>
+								<input type="text" name="parent1surname" id="edit_parent1surname" value="">
 						  </div>
 						  <div class="ui-grid-a">
-						  <div class="formfields" class="ui-block-a">
-								<label for="parent_1_phone"><span class="i18n" data-i18n="[html]example:text41"></span></label>
-								<select name="parent_1_phone" id="parent_1_phone">
-									 <option value="+91">+91</option>
-									 <option value="+92">+92</option>
-									 <option value="+93">+93</option>
-								</select>
-						  </div>
-						    <div class="formfields" class="ui-block-b">		    
-								<input type="number" name="parent_1_phone_no" id="parent_1_phone_no" value="">
-						  </div>
-						  </div>
-						  <div class="formfields">
-								<label for="parent_2_name"><span class="i18n" data-i18n="[html]example:text42"></span></label>
-								<input type="text" name="parent_2_name" id="parent_2_name" value="">
+                <div class="formfields" class="ui-block-a">
+  								<label for="edit_parent1phone_ext"><span class="i18n" data-i18n="[html]example:text41"></span></label>
+                </div>  
+  						  <div class="formfields" class="ui-block-a" style="float:left;width:39% !important;">               
+  								<select name="parent1phone_ext" id="edit_parent1phone_ext">
+  									 <option value="+91">+91</option>
+  									 <option value="+92">+92</option>
+  									 <option value="+93">+93</option>
+  								</select>
+  						  </div>
+						    <div class="formfields" class="ui-block-b" style="float:left;width:60% !important;">		    
+								<input type="number" name="parent1phone" id="edit_parent1phone" value="">
+						    </div>
 						  </div>
 						  <div class="formfields">
-								<label for="parent_2_surname"><span class="i18n" data-i18n="[html]example:text43"></span></label>
-								<input type="text" name="parent_2_surname" id="parent_2_surname" value="">
+								<label for="edit_parent2name"><span class="i18n" data-i18n="[html]example:text42"></span></label>
+								<input type="text" name="parent2name" id="edit_parent2name" value="">
+						  </div>
+						  <div class="formfields">
+								<label for="edit_parent2surname"><span class="i18n" data-i18n="[html]example:text43"></span></label>
+								<input type="text" name="parent2surname" id="edit_parent2surname" value="">
 						  </div>
 						  <div class="ui-grid-a">
-						  <div class="formfields" class="ui-block-a">
-								<label for="parent_2_phone"><span class="i18n" data-i18n="[html]example:text44"></span></label>
-								<select name="parent_2_phone" id="parent_2_phone">
-									 <option value="+91">+91</option>
-									 <option value="+92">+92</option>
-									 <option value="+93">+93</option>
-								</select>
-						  </div>
-						    <div class="formfields" class="ui-block-b">		    
-								<input type="number" name="parent_2_phone_no" id="parent_2_phone_no" value="">
-						  </div>
-						  </div>
-						  <div class="formfields">
-								<label for="accomodation"><span class="i18n" data-i18n="[html]example:text45"></span></label>
-								<textarea name="accomodation" id="accomodation" rows="3"></textarea>
-						  </div>
-						  <div class="formfields">
-								<label for="allergies"><span class="i18n" data-i18n="[html]example:text46"></span></label>
-								<textarea name="allergies" id="allergies" rows="3"></textarea>
+                <div class="formfields" class="ui-block-a" >
+  								<label for="edit_parent2phone_ext"><span class="i18n" data-i18n="[html]example:text44"></span></label>
+                </div>  
+  						  <div class="formfields" class="ui-block-a" style="float:left;width:39% !important;">
+  								
+  						  <select name="parent2phone_ext" id="edit_parent2phone_ext">
+                     <option value="+39">+39</option>
+  									 <option value="+91">+91</option>
+  									 <option value="+92">+92</option>
+  									 <option value="+93">+93</option>
+  								</select>
+  						  </div>
+  						    <div class="formfields" class="ui-block-b" style="float:left;width:60% !important;">		    
+  								<input type="number" name="parent2phone" id="edit_parent2phone" value="">
+  						  </div>
 						  </div>
 						  <div class="formfields">
-								<label for="blood_type"><span class="i18n" data-i18n="[html]example:text47"></span></label>
-								<select name="blood_type" id="blood_type">
+								<label for="edit_accom"><span class="i18n" data-i18n="[html]example:text45"></span></label>
+								<textarea name="accom" id="edit_accom" rows="3"></textarea>
+						  </div>
+						  <div class="formfields">
+								<label for="edit_allergies"><span class="i18n" data-i18n="[html]example:text46"></span></label>
+								<textarea name="allergies" id="edit_allergies" rows="3"></textarea>
+						  </div>
+						  <div class="formfields">
+								<label for="edit_blood"><span class="i18n" data-i18n="[html]example:text47"></span></label>
+								<select name="blood" id="edit_blood">
 									 <option value="A+">A+</option>
 									 <option value="A-">A-</option>
 									 <option value="B+">B+</option>
+									 <option value="B-">B-</option>
+									 <option value="AB+">AB+</option>
+									 <option value="AB-">AB-</option>
+									 <option value="O+">O+</option>
+									 <option value="O-">O-</option>
 								</select>
 						  </div>
 						  <div class="formfields">
-								<label for="medical_indications"><span class="i18n" data-i18n="[html]example:text48"></span></label>
-								<textarea name="medical_indications" id="medical_indications" rows="3"></textarea>
+								<label for="edit_medical"><span class="i18n" data-i18n="[html]example:text48"></span></label>
+								<textarea name="medical" id="edit_medical" rows="3"></textarea>
 						  </div>
 						  <div class="formfields">
-								<label for="message"><span class="i18n" data-i18n="[html]example:text49"></span></label>
-								<textarea name="message" id="message" rows="3"></textarea>
+								<label for="edit_message"><span class="i18n" data-i18n="[html]example:text49"></span></label>
+								<textarea name="message" id="edit_message" rows="3"></textarea>
 						  </div>
 						  <div class="formfields">
-								<label for="delete_after"><span class="i18n" data-i18n="[html]example:text50"></span></label>
-								<input type="date" name="delete_after" id="delete_after" value=""  />		
+								<label for="edit_deleteafter"><span class="i18n" data-i18n="[html]example:text50"></span></label>
+								<input type="date" name="deleteafter" id="edit_deleteafter" value=""  />		
 						  </div>					    
 				 </div>
 		  </div>
 		  <div data-role="footer" data-position="fixed">
-				<div class="bottom_button" align="center"><a href="#Infoview" data-role="button"><span class="i18n" data-i18n="[html]example:text17"></span></a></div>
+				<div class="bottom_button" align="center"><a href="javascript:void(0);" onclick="updateBraceletDetail()" data-role="button"><span class="i18n" data-i18n="[html]example:text17"></span></a></div>
 		  </div>
     </div>
 	<!-- <div data-role="page" id="delete_main" class="formbackground">

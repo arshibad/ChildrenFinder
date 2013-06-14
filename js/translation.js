@@ -57,7 +57,9 @@ var resources = {
             "text54": "Edit detail",
             "text55": "Delete permanently",
             "text56": "Children Finder",
-            "text57": "Language 2"
+            "text57": "Language 2",
+            "text58": "Done",
+            "text59": "Update"
         }
     },
     en: {
@@ -93,7 +95,7 @@ var resources = {
             "text33": "Registered bracelet",
             "text34": "Delete bracelet",
             "text35": "Are you sure you want permanentely delete",
-            "text36": "The bracelet will be unable if you..<br>You can register it again if you... the password <br> you entered on first registration.",
+            "text36": "The bracelet will be unusable if you perform the deletion. You can register it again if you kept the password you entered on first registration.",
             "text37": "Yes, delete it",
             "text38": "No, do not delete it",
             "text39": "Parent 1 Name",
@@ -114,7 +116,9 @@ var resources = {
             "text54": "Edit detail",
             "text55": "Delete permanently",
             "text56": "Children Finder",
-            "text57": "Language 2"
+            "text57": "Language 2",
+            "text58": "Done",
+            "text59": "Update"
         }
     },
     it: {
