@@ -29,6 +29,19 @@ $(document).ready(function(){
 		alert("Heee"+browser);
 		if(browser == 'no'){
 			alert("Heee");
+			var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+			scanner.scan(
+				function (result) {
+					 alert("We got a barcode\n" +
+							 "Result: " + result.text + "\n" +
+							 "Format: " + result.format + "\n" +
+							 "Cancelled: " + result.cancelled);
+				}, 
+				function (error) {
+					 alert("Scanning failed: " + error);
+				}
+			);
 			window.plugins.barcodeScanner.scan( function(result) {
 					alert("We got a barcode\n" +"Result: " + result.text + "\n" +"Format: " + result.format + "\n" +"Cancelled: " + result.cancelled);
 					getBarCodedetails(result.text);
