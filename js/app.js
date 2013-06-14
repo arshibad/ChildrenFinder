@@ -26,29 +26,20 @@ $(document).ready(function(){
 	});
 	
 	$('.readqrcode').bind('click',function(){
-		alert("Heee"+browser);
+		
 		if(browser == 'no'){
-			alert("Heee");
+			
 			var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
 			scanner.scan(
 				function (result) {
-					 alert("We got a barcode\n" +
-							 "Result: " + result.text + "\n" +
-							 "Format: " + result.format + "\n" +
-							 "Cancelled: " + result.cancelled);
+					 getBarCodedetails(result.text);
 				}, 
 				function (error) {
-					 alert("Scanning failed: " + error);
+					 alert("We have not found any valid Qrcode");	
 				}
 			);
-			window.plugins.barcodeScanner.scan( function(result) {
-					alert("We got a barcode\n" +"Result: " + result.text + "\n" +"Format: " + result.format + "\n" +"Cancelled: " + result.cancelled);
-					getBarCodedetails(result.text);
-					
-			  }, function(error) {
-				 alert("We have not found any valid Qrcode");	
-			 });	
+			
 		}else{
 			getBarCodedetails("");	
 		}
@@ -56,18 +47,20 @@ $(document).ready(function(){
 	
 	
 	$('.readqrcode_identify').bind('click',function(){
-		alert("Heeer"+browser);
+		
 		if(browser == 'no'){
-			alert("Heeer");
-			window.plugins.barcodeScanner.scan( function(result) {
-					//alert("We got a barcode\n" +"Result: " + result.text + "\n" +"Format: " + result.format + "\n" +"Cancelled: " + result.cancelled);
-					qrcode_identify(result.text);
-					
-			  }, function(error) {
-				 alert("We have not found any valid Qrcode");	
-			 });	
+			var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+			scanner.scan(
+				function (result) {
+					 qrcode_identify(result.text);
+				}, 
+				function (error) {
+					 alert("We have not found any valid Qrcode");	
+				}
+			);
 		}else{
-			
+			qrcode_identify("");
 		}
 	});
 	
