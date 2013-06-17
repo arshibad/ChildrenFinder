@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sample Proj</title>
+    <title>Children Finder</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
 	 <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" />
@@ -308,7 +308,7 @@
 		  </div>
     </div>
 	 
-	 <div data-role="page" id="registeredBracelet" class="formbackground" style="width: 100% !important;">
+	 <div data-role="page" id="registeredBracelet"  style="width: 100% !important;">
 		  <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
 				 <div class="homecontent">
@@ -367,15 +367,15 @@
 		  </div>
     </div>
 	 
-	 <div data-role="page" id="children_finder" class="formbackground" style="width: 100% !important;">
+	 <div data-role="page" id="children_finder" style="width: 100% !important;">
 		  <div data-role="content" id="children_finder_content">
 		    <div data-role="content" id="maincontent1">
 				 <div class="logo"><span class="i18n text1" data-i18n="[html]example:text1"></span><span></span> <span class="i18n text2" data-i18n="[html]example:text2"></span></div>
 				    <div class="homecontent">
 					 <div class="content_header"><span class="i18n text1" data-i18n="[html]example:text56"></span></div>
-					    <a href="javascript:void(0);" onclick="editmessage();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text52"></span></div></a>
-					    <a href="javascript:void(0);" onclick="editposition();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text53"></span></div></a>
-					    <a href="javascript:void(0);" onclick="editDetail();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text54"></span></div></a>
+					    <a href="javascript:void(0);" onclick="editmessage();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text52"></span></div></a><br/>
+					    <a href="javascript:void(0);" onclick="editposition();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text53"></span></div></a><br/>
+					    <a href="javascript:void(0);" onclick="editDetail();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text54"></span></div></a><br/>
 					    <a href="javascript:void(0);" onclick="deletebraclet();"><div class="homebox"><span class="i18n text1" data-i18n="[html]example:text55"></span></div></a>						  
 					 </div>		 
 		    </div>  
@@ -395,8 +395,8 @@
 					 </div>		 
 		    </div>  
 		 </div>
-		 <div data-role="footer" data-position="fixed">
-				<div class="bottom_button" align="center"><a href="javascript:void(0);" onclick="updateMessage();" data-role="button"><span class="i18n" data-i18n="[html]example:text59"></span></a></div>
+		 <div data-role="footer" data-position="fixed" onclick="updateMessage();">
+				<div class="bottom_button" align="center"><a href="#"  data-role="button"><span class="i18n" data-i18n="[html]example:text59"></span></a></div>
 		  </div>		 
 	 </div>
 	 <div data-role="page" id="update_position_main" class="formbackground" style="width: 100% !important;">
@@ -411,8 +411,8 @@
 					 </div>		 
 		    </div>  
 		 </div>
-		 <div data-role="footer" data-position="fixed">
-				<div class="bottom_button" align="center"><a href="javascript:void(0);" onclick="updatePosition();" data-role="button"><span class="i18n" data-i18n="[html]example:text59"></span></a></div>
+		 <div data-role="footer" data-position="fixed" onclick="updatePosition();" >
+				<div class="bottom_button" align="center"><a href="#" data-role="button"><span class="i18n" data-i18n="[html]example:text59"></span></a></div>
 		  </div>		 
 	 </div>
 	 <div data-role="page" id="edit_detail" class="formbackground" style="width: 100% !important;">
@@ -536,8 +536,8 @@
 						  </div>					    
 				 </div>
 		  </div>
-		  <div data-role="footer" data-position="fixed">
-				<div class="bottom_button" align="center"><a href="javascript:void(0);" onclick="updateBraceletDetail()" data-role="button"><span class="i18n" data-i18n="[html]example:text17"></span></a></div>
+		  <div data-role="footer" data-position="fixed" onclick="updateBraceletDetail()">
+				<div class="bottom_button" align="center"><a href="#"  data-role="button"><span class="i18n" data-i18n="[html]example:text17"></span></a></div>
 		  </div>
     </div>
 	<!-- <div data-role="page" id="delete_main" class="formbackground">

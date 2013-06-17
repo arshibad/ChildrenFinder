@@ -556,6 +556,7 @@ function registerNewBracelet(){
 }
 
 function showBraceletDetail(id){
+	$.mobile.loading('show');
 	executeQuery('select * from bracelet where id = "'+id+'"',function(results){
 	var html = '';
 	//console.log("Check Cat >>"+results.rows.length);
@@ -597,6 +598,7 @@ function showBraceletDetail(id){
 				$('#info_accom').html(x.accom);
 				$('#info_medical').html(x.medical);
 				changepage('Infoview');
+				$.mobile.loading('hide');
 			}		 
 		}else{
 			alert("Bracelet not found!");
@@ -611,7 +613,7 @@ function showBraceletDetail(id){
 }
 
 function registeredBreacelet(){
-	
+	$.mobile.loading('show');
 	executeQuery('select * from bracelet',function(results){
 		var html = '';
 		if(results.rows.length > 0){
@@ -622,6 +624,7 @@ function registeredBreacelet(){
 			}
 			$('#registered_list').html(html);
 			changepage('registeredBracelet');
+			$.mobile.loading('hide');
 		}else{
 			$.mobile.loading('hide');
 			changepage('home');
@@ -635,6 +638,7 @@ function registeredBreacelet(){
 
 
 function chooseCurrentBracelet(id){
+	$.mobile.loading('show');
 	executeQuery('select * from bracelet where id = "'+id+'"',function(results){
 	var html = '';
 	//console.log("Check Cat >>"+results.rows.length);
@@ -646,7 +650,8 @@ function chooseCurrentBracelet(id){
 				console.log(x);
 				selectedBraceletDetails = x;
 				selectedBracelet = x.id;
-				changepage('children_finder');	
+				changepage('children_finder');
+				$.mobile.loading('hide');
 			}		 
 		}else{
 			alert("Bracelet not found!");
@@ -804,7 +809,9 @@ function updatePosition(){
 }
 
 function editDetail(){
-	changepage('edit_detail');	
+	$.mobile.loading('show');
+	changepage('edit_detail');
+	$.mobile.loading('show');
 	loadnationalityJson('edit');
 	if(selectedBracelet > 0){
 		var update_position_txt = selectedBraceletDetails.address;
@@ -884,10 +891,10 @@ function editDetail(){
 				$('#edit_medical').val(x.medical);
 				$('#edit_message').val(x.message);
 				$('#edit_deleteafter').val(x.deleteafter);
-				
-		
+				$.mobile.loading('hide');
 	}else{
-		registeredBreacelet();	
+		registeredBreacelet();
+		$.mobile.loading('hide');
 	}
 }
 

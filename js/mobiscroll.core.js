@@ -228,7 +228,7 @@
                 }
             }
             
-            css.top = t < 0 ? 0 : t;
+            //css.top = t < 0 ? 0 : t;
             css.left = l;
             d.css(css);
             
@@ -342,6 +342,7 @@
             if (has3d) {
                 style[pr + 'Transform'] = 'translate3d(0,' + px + 'px,0)';
             } else {
+                
                 style.top = px + 'px';
             }
             //});
@@ -1051,7 +1052,9 @@
         };
 
     $(document).bind(END_EVENT, function (e) {
+        
         if (move) {
+            
             var time = new Date() - startTime,
                 val = constrain(pos + (start - stop) / h, min - 1, max + 1),
                 speed,
