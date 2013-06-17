@@ -41,9 +41,9 @@ function curlpost($Url,$parmas){
 
 $u = urldecode($_GET['url']);
 $callback = $_GET['callback'];
-$_POST['searchType'] = 0;
-$_POST['orderBy'] = 0;
-$_POST['searchPage'] = 1;
+///$_POST['searchType'] = 0;
+//$_POST['orderBy'] = 0;
+//$_POST['searchPage'] = 1;
     
 if($_POST){
     

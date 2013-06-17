@@ -3,7 +3,7 @@ var url = "http://fatbraindev.somee.com/DeviceGateway.aspx";
 var website = 'http://fatbraindev.somee.com/';
 //url = encodeURIComponent(url);
 
-var browser  = 'no';
+var browser  = 'yes';
 
 if(browser == 'yes'){
 	url = encodeURIComponent(url);
@@ -170,7 +170,7 @@ function enterNumber_identify(){
   $.mobile.loading('hide');
 }
 
-function qrcode_identify(surl){
+function qrcode_identify(url){
 	if(surl == ''){
 		surl = 'http://www.childrenfinder.com/123456';	
 	}
@@ -256,17 +256,34 @@ function loadnationalityJson(mode){
   var html4 = '';
   
   for(i=0;i<nationality.length;i++){
-		
+		//html+='<option value="'+nationality[i][0]+'">'+nationality[i][1]+'</option>';
     if (typeof(nationality[i][0]) != 'undefined'){
-		html2+='<li data-val="'+nationality[i][2]+'"><div class="car"><div class="img-cont"><img src="images/flags-pack/flag_'+nationality[i][0].toLowerCase()+'.png" /></div><span>+'+nationality[i][2]+'</span></div></li>';
-		
-		html+='<li data-val="'+nationality[i][0]+'##'+nationality[i][1]+'##'+nationality[i][2]+'"><div class="car"><div class="img-cont"><img src="images/flags-pack/flag_'+nationality[i][0].toLowerCase()+'.png" /></div><span>'+nationality[i][1]+'</span></div></li>';
+    html+='<option value="'+nationality[i][0]+'#'+nationality[i][2]+'" data-image="images/flags-pack/flag_'+nationality[i][0].toLowerCase()+'.png" data-imagecss="flag '+nationality[i][0]+'" data-title="'+nationality[i][1]+'">'+nationality[i][1]+'</option>';
+    html2+='<option value="'+nationality[i][2]+'" data-image="images/flags-pack/flag_'+nationality[i][0].toLowerCase()+'.png" data-imagecss="flag '+nationality[i][0]+'" data-title="'+nationality[i][1]+'">'+'+'+nationality[i][2]+'</option>';
+	 
+	 html4+='<li data-val="'+nationality[i][0]+'##'+nationality[i][1]+'"><div class="car"><div class="img-cont"><img src="images/flags-pack/flag_'+nationality[i][0].toLowerCase()+'.png" /></div><span>'+nationality[i][1]+'</span></div></li>';
     }
+
 	}
 	if(mode == 'add'){
-		$('#demo_childnation').html(html);
+		/*$('#childnation').html(html);
+		$('#childnation').selectmenu('refresh');
+		$('#childnation').find('option').each(function(index, element){
+				if (typeof($(element).attr('data-image')) != 'undefined') {
+					 $('#childnation-menu').children().eq(index).find('.ui-btn-inner').append('<span class="ui-icon flag"><img src="'+$(element).attr('data-image')+'"></span>');
+				}
+		 });*/		
+		$('#demo_childnation').html(html4);
 	}else{
-		$('#demo_edit_childnation').html(html);
+		$('#edit_childnation').html(html);
+   
+		$('#edit_childnation').selectmenu('refresh');
+		
+		$('#edit_childnation').find('option').each(function(index, element){
+			  if (typeof($(element).attr('data-image')) != 'undefined') {
+					$('#edit_childnation-menu').children().eq(index).find('.ui-btn-inner').append('<span class="ui-icon flag"><img src="'+$(element).attr('data-image')+'"></span>');
+			  }
+		});	
 	}
 	
 	
@@ -295,10 +312,8 @@ function loadnationalityJson(mode){
 	}
   
   if(mode == 'add'){
-		$('#demo_parent1phone_ext').html(html2);
-		$('#demo_parent2phone_ext').html(html2);
-		
-		
+		$('#parent1phone_ext').html(html2);
+		$('#parent2phone_ext').html(html2);
 		$('#childlang1').html(html1);
 		$('#childlang2').html(html3);
 		
@@ -306,36 +321,68 @@ function loadnationalityJson(mode){
 		$("#childlang2 option[value='']").prop("selected", true);
 		$('#childlang2').selectmenu('refresh');
 		$('#childlang1').selectmenu('refresh');
+		
+		$('#parent1phone_ext').selectmenu('refresh');
+		$('#parent2phone_ext').selectmenu('refresh');
+		$('#parent1phone_ext').find('option').each(function(index, element){
+				if (typeof($(element).attr('data-image')) != 'undefined') {
+					 $('#parent1phone_ext-menu').children().eq(index).find('.ui-btn-inner').append('<span class="ui-icon flag"><img src="'+$(element).attr('data-image')+'"></span>');
+				}
+		});
+		
+		$('#parent2phone_ext').find('option').each(function(index, element){
+				if (typeof($(element).attr('data-image')) != 'undefined') {
+					 $('#parent2phone_ext-menu').children().eq(index).find('.ui-btn-inner').append('<span class="ui-icon flag"><img src="'+$(element).attr('data-image')+'"></span>');
+				}
+		 });
   }else{
-		$('#demo_edit_parent1phone_ext').html(html2);
-		$('#demo_edit_parent2phone_ext').html(html2);
+		$('#edit_parent1phone_ext').html(html2);
+		$('#edit_parent2phone_ext').html(html2);
 		
 		$('#edit_childlang1').html(html1);
 		$('#edit_childlang2').html(html3);
 		
+		$('#parent1phone_ext').selectmenu('refresh');
+		$('#parent2phone_ext').selectmenu('refresh');
+		$('#parent1phone_ext').find('option').each(function(index, element){
+				if (typeof($(element).attr('data-image')) != 'undefined') {
+					 $('#parent1phone_ext-menu').children().eq(index).find('.ui-btn-inner').append('<span class="ui-icon flag"><img src="'+$(element).attr('data-image')+'"></span>');
+				}
+		});
+		
+		$('#parent2phone_ext').find('option').each(function(index, element){
+				if (typeof($(element).attr('data-image')) != 'undefined') {
+					 $('#parent2phone_ext-menu').children().eq(index).find('.ui-btn-inner').append('<span class="ui-icon flag"><img src="'+$(element).attr('data-image')+'"></span>');
+				}
+		 });
   }
 	
-	if(mode == 'add'){
-			var curr = new Date().getFullYear();
-			var opt = {
-				 'date': {
-					  preset: 'date',
-					  dateOrder: 'd Dmmyy'
-				 }
-			}
-			var demo = 'date';
-		
-			$('#deleteafter').val('');
-			$('#deleteafter').scroller('destroy').scroller($.extend(opt[demo], {
-				 theme: 'ios',
-				 mode: 'scroller',
-				 lang: 'en',
-				 display: 'bottom',
-				 animate: 'slideup'
-			}));
-			$('.demo').hide();
-			
-			$('#demo_childnation').scroller().image({
+	
+				var curr = new Date().getFullYear();
+            var opt = {
+                'date': {
+                    preset: 'date',
+                    dateOrder: 'd Dmmyy'
+                }
+            }
+            var demo = 'date';
+
+            if (!demo.match(/select/i)) {
+                $('.demo-test-' + demo).val('');
+            }
+
+            $('.demo-test-' + demo).scroller('destroy').scroller($.extend(opt[demo], {
+                theme: 'ios',
+                mode: 'scroller',
+                lang: 'en',
+                display: 'bottom',
+                animate: 'slideup'
+            }));
+            $('.demo').hide();
+            $('.demo-' + demo).show();
+				
+				
+				$('#demo_childnation').scroller().image({
                 theme: 'ios',
                 display: 'bottom',
                 mode: 'scroller',
@@ -348,108 +395,10 @@ function loadnationalityJson(mode){
 						selectedvalArr  = selectedval.split("##");
 						
 						$('#demo_childnation' + '_dummy').val(selectedvalArr[1]);
-						$('#childnation').val(selectedvalArr[0]);
-						loadnation(valueText);
+						loadnation(selectedvalArr[0]);
 					 }
-         });
-			$('#demo_childnation' + '_dummy').val(nationality[0][1]);
-			$('#childnation').val(nationality[0][0]);
-						
-			$('#demo_parent1phone_ext').scroller().image({
-                theme: 'ios',
-                display: 'bottom',
-                mode: 'scroller',
-                labels: ['Make'],
-                inputClass: 'i-txt',
-					 onSelect: function(valueText, inst){
-						$('#demo_parent1phone_ext' + '_dummy').val("+"+valueText);
-						$('#parent1phone_ext').val(valueText);
-					 }
-         });
-			$('#demo_parent1phone_ext' + '_dummy').val("+"+nationality[0][2]);
-			$('#parent1phone_ext').val(nationality[0][2]);
-			
-			$('#demo_parent2phone_ext').scroller().image({
-                theme: 'ios',
-                display: 'bottom',
-                mode: 'scroller',
-                labels: ['Make'],
-                inputClass: 'i-txt',
-					 onSelect: function(valueText, inst){
-						$('#demo_parent2phone_ext' + '_dummy').val("+"+valueText);
-						$('#parent2phone_ext').val(valueText);
-					 }
-         });
-			$('#demo_parent2phone_ext' + '_dummy').val("+"+nationality[0][2]);
-			$('#parent2phone_ext').val(nationality[0][2]);
-	}else{
-		var curr = new Date().getFullYear();
-			var opt = {
-				 'date': {
-					  preset: 'date',
-					  dateOrder: 'd Dmmyy'
-				 }
-			}
-			var demo = 'date';
-		
-			$('#edit_deleteafter').val('');
-			$('#edit_deleteafter').scroller('destroy').scroller($.extend(opt[demo], {
-				 theme: 'ios',
-				 mode: 'scroller',
-				 lang: 'en',
-				 display: 'bottom',
-				 animate: 'slideup'
-			}));
-			$('.demo').hide();
-			
-			$('#demo_edit_childnation').scroller().image({
-                theme: 'ios',
-                display: 'bottom',
-                mode: 'scroller',
-                labels: ['Make'],
-                inputClass: 'i-txt',
-					 onSelect: function(valueText, inst){
-						console.log(valueText);
-						console.log(inst);
-						var selectedval = valueText;
-						selectedvalArr  = selectedval.split("##");
-						
-						$('#demo_edit_childnation' + '_dummy').val(selectedvalArr[1]);
-						$('#edit_childnation').val(selectedvalArr[0]);
-						loadnation_edit(valueText);
-					 }
-         });
-			$('#demo_edit_childnation' + '_dummy').val(nationality[0][1]);
-			$('#edit_childnation').val(nationality[0][0]);
-						
-			$('#demo_edit_parent1phone_ext').scroller().image({
-                theme: 'ios',
-                display: 'bottom',
-                mode: 'scroller',
-                labels: ['Make'],
-                inputClass: 'i-txt',
-					 onSelect: function(valueText, inst){
-						$('#demo_parent1phone_ext' + '_dummy').val("+"+valueText);
-						$('#parent1phone_ext').val(valueText);
-					 }
-         });
-			$('#demo_edit_parent1phone_ext' + '_dummy').val("+"+nationality[0][2]);
-			$('#edit_parent1phone_ext').val(nationality[0][2]);
-			
-			$('#demo_edit_parent2phone_ext').scroller().image({
-                theme: 'ios',
-                display: 'bottom',
-                mode: 'scroller',
-                labels: ['Make'],
-                inputClass: 'i-txt',
-					 onSelect: function(valueText, inst){
-						$('#demo_edit_parent2phone_ext' + '_dummy').val("+"+valueText);
-						$('#edit_parent2phone_ext').val(valueText);
-					 }
-         });
-			$('#demo_edit_parent2phone_ext' + '_dummy').val("+"+nationality[0][2]);
-			$('#edit_parent2phone_ext').val(nationality[0][2]);
-	}
+            });    
+	
 }
 
 function lang1selected(val,mode){
@@ -479,33 +428,36 @@ function lang1selected(val,mode){
 }
 
 function loadnation(val){
-  var phArr =val.split("##");
-  var ph = phArr[2];
+  var phArr =val.split("#");
+  var ph = phArr[1];
   if($('#parent1phone').val() == ''){
-	 $('#demo_parent1phone_ext' + '_dummy').val("+"+ph);
-	 $('#parent1phone_ext').val(ph);
+    $('#parent1phone_ext option:selected').attr('selected','');
+    $('#parent1phone_ext option:contains("+'+ph+'")').prop('selected', true);
+    $('#parent1phone_ext').selectmenu('refresh');
   }
   
   if($('#parent2phone').val() == ''){
-    $('#demo_parent2phone_ext' + '_dummy').val("+"+ph);
-	 $('#parent2phone_ext').val(ph);
+    $('#parent2phone_ext option:selected').attr('selected','');
+    $('#parent2phone_ext option:contains("+'+ph+'")').prop('selected', true);
+    $('#parent2phone_ext').selectmenu('refresh');
   }
   
 }
 
 function loadnation_edit(val){
-  var phArr =val.split("##");
-  var ph = phArr[2];
+  var phArr =val.split("#");
+  var ph = phArr[1];
+  if($('#edit_parent1phone').val() == ''){
+    $('#edit_parent1phone option:selected').attr('selected','');
+    $('#edit_parent1phone option:contains("+'+ph+'")').prop('selected', true);
+    $('#edit_parent1phone').selectmenu('refresh');
+  }
   
-  //if($('#edit_parent1phone').val() == ''){
-	 $('#demo_edit_parent1phone_ext' + '_dummy').val("+"+ph);
-	 $('#edit_parent1phone_ext').val(ph);
-  //}
-  
-  //if($('#edit_parent2phone').val() == ''){
-    $('#demo_edit_parent2phone_ext' + '_dummy').val("+"+ph);
-	 $('#edit_parent2phone_ext').val(ph);
-  //}
+  if($('#edit_parent1phone').val() == ''){
+    $('#edit_parent1phone option:selected').attr('selected','');
+    $('#edit_parent1phone option:contains("+'+ph+'")').prop('selected', true);
+    $('#edit_parent1phone').selectmenu('refresh');
+  }
   
 }
 
@@ -839,15 +791,12 @@ function editDetail(){
 				$('#edit_parent2phone_ext option:contains("+'+cphoneext+'")').prop('selected', true);
 				$('#edit_parent2phone_ext').selectmenu('refresh');
 				
-				$('#demo_edit_childnation' + '_dummy').val(cnation);
-				$('#edit_childnation').val(x.childnation);
 				
-				$('#demo_edit_parent1phone_ext' + '_dummy').val("+"+cphoneext);
-				$('#edit_parent1phone_ext').val(cphoneext);
-				
-				$('#demo_edit_parent2phone_ext' + '_dummy').val("+"+cphoneext);
-				$('#edit_parent2phone_ext').val(cphoneext);
-			
+				$('#edit_childnation').selectmenu();
+				$('#edit_childnation option:selected').attr('selected','');
+				$("#edit_childnation option[value='"+x.childnation+"#"+cphoneext+"']").prop("selected", true);
+				//$('#edit_childnation option:contains("+'+cnation+'")').prop('selected', true);
+				$('#edit_childnation').selectmenu('refresh');
 				
 				$('#edit_childlang1').selectmenu();
 				$('#edit_childlang1 option:selected').attr('selected','');
