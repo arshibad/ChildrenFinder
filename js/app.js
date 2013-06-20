@@ -66,25 +66,7 @@ $(document).ready(function(){
 	
 	
 	
-	if(browser == 'no'){
-		navigator.globalization.getPreferredLanguage(
-			function (language) {
-				deviceLanguage = language.value;
-      //alert('language: ' + language.value + '\n');
-      },
-			function () {
-      //alert('Error getting language\n');
-      }
-		 );
-		navigator.globalization.getLocaleName(
-			function (locale) {
-        //alert('locale: ' + locale.value + '\n');
-        },
-			function () {
-      //alert('Error getting locale\n');
-      }
-		 );	
-	}
+	
   
   
 
@@ -123,7 +105,27 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		  
+		  if(browser == 'no'){
+				navigator.globalization.getPreferredLanguage(
+					function (language) {
+						deviceLanguage = language.value;
+						alert('language: ' + language.value + '\n');
+				},
+					function () {
+					//alert('Error getting language\n');
+				}
+				 );
+				navigator.globalization.getLocaleName(
+					function (locale) {
+						
+						alert('locale: ' + locale.value + '\n');
+						deviceNationality = locale.value;
+				  },
+					function () {
+				//alert('Error getting locale\n');
+				}
+				 );	
+			}
 		  
     },
     // Update DOM on a Received Event
@@ -255,6 +257,11 @@ function loadnationalityJson(mode){
   var html2 = '';
   var html4 = '';
   
+  var selectedNationality = '';
+  var selectedNationalityCode = '';
+  var selectedLanguage = '';
+  var selectedExtension = '';
+  
   for(i=0;i<nationality.length;i++){
 		
     if (typeof(nationality[i][0]) != 'undefined'){
@@ -262,6 +269,21 @@ function loadnationalityJson(mode){
 		
 		html+='<li data-val="'+nationality[i][0]+'##'+nationality[i][1]+'##'+nationality[i][2]+'"><div class="car"><div class="img-cont"><img src="images/flags-pack/flag_'+nationality[i][0].toLowerCase()+'.png" /></div><span>'+nationality[i][1]+'</span></div></li>';
     }
+	 if(mode == 'add'){
+			if(deviceNationality != ''){
+				if(deviceNationality == nationality[i][2]){
+					selectedExtension = nationality[i][2];
+					selectedNationality = nationality[i][1];
+					selectedNationalityCode= nationality[i][0];
+				}
+			}else{
+					selectedExtension = nationality[0][2];
+					selectedNationality = nationality[0][1];
+					selectedNationalityCode= nationality[0][0];
+			}
+			
+			
+	 }
 	}
 	if(mode == 'add'){
 		$('#demo_childnation').html(html);
@@ -278,7 +300,14 @@ function loadnationalityJson(mode){
 	for(x=0;x<languages.length;x++){
 		if(typeof(languages[x][0]) != 'undefined') {
 			if(mode =='add'){
-				if(x == 0){
+				if(deviceLanguage != ''){
+					if(deviceLanguage == languages[x][1])
+					selectedLanguage = languages[x][1];	
+				}else{
+					selectedLanguage = languages[0][1];	
+				}
+			
+				if(selectedLanguage == languages[0][1]){
 					html1+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'" selected="selected">'+languages[x][1]+'</option>';
 					html3+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'" selected="selected">'+languages[x][1]+'</option>';		
 				}else{
@@ -290,6 +319,8 @@ function loadnationalityJson(mode){
 				html1+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';
 				html3+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';	
 			}
+			
+			
 			
 		}
 	}
@@ -352,8 +383,8 @@ function loadnationalityJson(mode){
 						loadnation(valueText);
 					 }
          });
-			$('#demo_childnation' + '_dummy').val(nationality[0][1]);
-			$('#childnation').val(nationality[0][0]);
+			$('#demo_childnation' + '_dummy').val(selectedNationality);
+			$('#childnation').val(selectedNationalityCode);
 						
 			$('#demo_parent1phone_ext').scroller().image({
                 theme: 'ios',
@@ -366,8 +397,8 @@ function loadnationalityJson(mode){
 						$('#parent1phone_ext').val(valueText);
 					 }
          });
-			$('#demo_parent1phone_ext' + '_dummy').val("+"+nationality[0][2]);
-			$('#parent1phone_ext').val(nationality[0][2]);
+			$('#demo_parent1phone_ext' + '_dummy').val("+"+selectedExtension);
+			$('#parent1phone_ext').val(selectedExtension);
 			
 			$('#demo_parent2phone_ext').scroller().image({
                 theme: 'ios',
@@ -380,8 +411,8 @@ function loadnationalityJson(mode){
 						$('#parent2phone_ext').val(valueText);
 					 }
          });
-			$('#demo_parent2phone_ext' + '_dummy').val("+"+nationality[0][2]);
-			$('#parent2phone_ext').val(nationality[0][2]);
+			$('#demo_parent2phone_ext' + '_dummy').val("+"+selectedExtension);
+			$('#parent2phone_ext').val(selectedExtension);
 	}else{
 		var curr = new Date().getFullYear();
 			var opt = {
@@ -947,6 +978,7 @@ function deletebraclet(){
 	
 	if(selectedBracelet > 0){
 		$('#delete_bracelet_id').html(selectedBraceletDetails.cur_bracelet_code);
+		$('#delete_bracelet_name').html(selectedBraceletDetails.childname);
 		changepage('deleteBracelet');	
 	}else{
 		registeredBreacelet();	
