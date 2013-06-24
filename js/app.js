@@ -18,6 +18,16 @@ var deviceNationality = '';
 var selectedBracelet = '';
 var selectedBraceletDetails;
 
+if(browser == 'yes'){
+	var dlang = 'en_GB';//locale.value;
+	dlangArr = dlang.split("_");
+	deviceLanguage = dlangArr[0].toUpperCase();
+	if(deviceLanguage == 'EN'){
+		deviceLanguage = 'IT';
+	}
+	//alert(deviceLanguage);
+}
+						
 $(document).ready(function(){
 	createDatabase();
 	
@@ -65,9 +75,9 @@ $(document).ready(function(){
 	});
 	
 	
-	
-	
-  
+	$( "#deleteBracelet" ).on( "pageshow", function( event, ui ) {
+		deletebraclet();
+	});
   
 
 	/*$('#submitpassword').on('click',function(){
@@ -77,6 +87,7 @@ $(document).ready(function(){
 	
 	registeredBreacelet();
 });
+
 
 $(document).bind('pageinit', function (event) {
  	i18n.init({ debug: true, resStore: resources }, function () {
@@ -98,6 +109,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+		  document.addEventListener("backbutton", this.backCallback, false);
     },
     // deviceready Event Handler
     //
@@ -118,7 +130,7 @@ var app = {
 				navigator.globalization.getLocaleName(
 					function (locale) {
 						
-						alert('locale: ' + locale.value + '\n');
+						//alert('locale: ' + locale.value + '\n');
 						//deviceNationality = locale.value;
 						var dlang = locale.value;
 						dlangArr = dlang.split("_");
@@ -131,10 +143,17 @@ var app = {
 			}
 		  
     },
+	 backCallback: function(){
+			var activePage = $.mobile.activePage[0].id;
+			if(activePage == 'home' || activePage == 'registeredBracelet'){
+				return false;
+			}
+	 },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         console.log('Received Event: ');
     }
+	 
 };
 
 function getBarCodedetails(surl){
@@ -274,7 +293,9 @@ function loadnationalityJson(mode){
 		html+='<li data-val="'+nationality[i][0]+'##'+nationality[i][1]+'##'+nationality[i][2]+'"><div class="car"><div class="img-cont"><img src="images/flags-pack/flag_'+nationality[i][0].toLowerCase()+'.png" /></div><span>'+nationality[i][1]+'</span></div></li>';
     }
 	 if(mode == 'add'){
-			if(deviceNationality != ''){
+		
+			if(deviceLanguage != ''){
+				console.log(deviceLanguage+"==>"+nationality[i][0]);
 				//if(deviceNationality == nationality[i][2]){
 				if(deviceLanguage == nationality[i][0]){
 					selectedExtension = nationality[i][2];
@@ -306,7 +327,7 @@ function loadnationalityJson(mode){
 		if(typeof(languages[x][0]) != 'undefined') {
 			if(mode =='add'){
 				if(deviceLanguage != ''){
-					if(deviceLanguage == languages[x][1]){
+					if(deviceLanguage == languages[x][0]){
 						selectedLanguage = languages[x][1];
 						selectedLanguageCode = languages[x][0];	
 					}
@@ -1160,6 +1181,8 @@ function deleteBreaceletPermanent(){
 							executeQuery(sql,function(results){
 								  
 								  alert("OK, Bracelet deleted successfully");
+								  selectedBraceletDetails = "";
+								  selectedBracelet = 0;
 								  registeredBreacelet();	
 								  return results;
 							},function(error){
