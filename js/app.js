@@ -3,7 +3,7 @@ var url = "http://fatbraindev.somee.com/DeviceGateway.aspx";
 var website = 'http://fatbraindev.somee.com/';
 //url = encodeURIComponent(url);
 
-var browser  = 'yes';
+var browser  = 'no';
 
 if(browser == 'yes'){
 	url = encodeURIComponent(url);
