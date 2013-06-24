@@ -75,11 +75,6 @@ $(document).ready(function(){
 	});
 	
 	
-	$( "#deleteBracelet" ).on( "pageshow", function( event, ui ) {
-		deletebraclet();
-	});
-  
-
 	/*$('#submitpassword').on('click',function(){
 		console.log("as");
 		;
@@ -144,9 +139,13 @@ var app = {
 		  
     },
 	 backCallback: function(){
+			alert("as");
 			var activePage = $.mobile.activePage[0].id;
+			alert(activePage);
 			if(activePage == 'home' || activePage == 'registeredBracelet'){
 				return false;
+			}else{
+				navigator.app.backHistory();
 			}
 	 },
     // Update DOM on a Received Event
