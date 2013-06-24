@@ -108,8 +108,8 @@ var app = {
 		  if(browser == 'no'){
 				navigator.globalization.getPreferredLanguage(
 					function (language) {
-						deviceLanguage = language.value;
-						alert('language: ' + language.value + '\n');
+						//deviceLanguage = language.value;
+						//alert('language: ' + language.value + '\n');
 				},
 					function () {
 					//alert('Error getting language\n');
@@ -118,8 +118,11 @@ var app = {
 				navigator.globalization.getLocaleName(
 					function (locale) {
 						
-						//alert('locale: ' + locale.value + '\n');
+						alert('locale: ' + locale.value + '\n');
 						//deviceNationality = locale.value;
+						var dlang = locale.value;
+						dlangArr = dlang.split("_");
+						deviceLanguage = dlangArr[0].toUpperCase();
 				  },
 					function () {
 				//alert('Error getting locale\n');
