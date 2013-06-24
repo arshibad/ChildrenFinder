@@ -453,3 +453,7 @@ background-color: rgba(0,0,0,0) !important;
     left: 34%;
     margin-top: 9px;
 }
+
+.dww{
+    min-width: 100px !important;
+}

@@ -3,7 +3,7 @@ var url = "http://fatbraindev.somee.com/DeviceGateway.aspx";
 var website = 'http://fatbraindev.somee.com/';
 //url = encodeURIComponent(url);
 
-var browser  = 'no';
+var browser  = 'yes';
 
 if(browser == 'yes'){
 	url = encodeURIComponent(url);
@@ -118,8 +118,8 @@ var app = {
 				navigator.globalization.getLocaleName(
 					function (locale) {
 						
-						alert('locale: ' + locale.value + '\n');
-						deviceNationality = locale.value;
+						//alert('locale: ' + locale.value + '\n');
+						//deviceNationality = locale.value;
 				  },
 					function () {
 				//alert('Error getting locale\n');
@@ -259,6 +259,7 @@ function loadnationalityJson(mode){
   
   var selectedNationality = '';
   var selectedNationalityCode = '';
+  var selectedLanguageCode = '';
   var selectedLanguage = '';
   var selectedExtension = '';
   
@@ -271,7 +272,8 @@ function loadnationalityJson(mode){
     }
 	 if(mode == 'add'){
 			if(deviceNationality != ''){
-				if(deviceNationality == nationality[i][2]){
+				//if(deviceNationality == nationality[i][2]){
+				if(deviceLanguage == nationality[i][0]){
 					selectedExtension = nationality[i][2];
 					selectedNationality = nationality[i][1];
 					selectedNationalityCode= nationality[i][0];
@@ -296,32 +298,34 @@ function loadnationalityJson(mode){
 	
   var html1 = '';
   var html3 = '';
-  html3+='<option value=""></option>';
+  html3+='<li data-val="##"><div class="car"><span>&nbsp;</span></div></li>';
 	for(x=0;x<languages.length;x++){
 		if(typeof(languages[x][0]) != 'undefined') {
 			if(mode =='add'){
 				if(deviceLanguage != ''){
-					if(deviceLanguage == languages[x][1])
-					selectedLanguage = languages[x][1];	
+					if(deviceLanguage == languages[x][1]){
+						selectedLanguage = languages[x][1];
+						selectedLanguageCode = languages[x][0];	
+					}
 				}else{
-					selectedLanguage = languages[0][1];	
-				}
-			
-				if(selectedLanguage == languages[0][1]){
-					html1+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'" selected="selected">'+languages[x][1]+'</option>';
-					html3+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'" selected="selected">'+languages[x][1]+'</option>';		
-				}else{
-					html1+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';
-					html3+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';		
+					selectedLanguage = languages[0][1];
+					selectedLanguageCode = languages[0][0];
 				}
 				
+				
+				html1+='<li data-val="'+languages[x][0]+'##'+languages[x][1]+'"><div class="car"><span>'+languages[x][1]+'</span></div></li>';
+				if(selectedLanguageCode != languages[x][0]){
+					html3+='<li data-val="'+languages[x][0]+'##'+languages[x][1]+'"><div class="car"><span>'+languages[x][1]+'</span></div></li>';	
+				}
+				
+				
 			}else{
-				html1+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';
-				html3+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';	
+				html1+='<li data-val="'+languages[x][0]+'##'+languages[x][1]+'"><div class="car"><span>'+languages[x][1]+'</span></div></li>';
+				html3+='<li data-val="'+languages[x][0]+'##'+languages[x][1]+'"><div class="car"><span>'+languages[x][1]+'</span></div></li>';
+					
+				//html1+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';
+				//html3+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';	
 			}
-			
-			
-			
 		}
 	}
   
@@ -330,19 +334,19 @@ function loadnationalityJson(mode){
 		$('#demo_parent2phone_ext').html(html2);
 		
 		
-		$('#childlang1').html(html1);
-		$('#childlang2').html(html3);
+		$('#demo_childlang1').html(html1);
+		$('#demo_childlang2').html(html3);
 		
-		$('#childlang2 option:selected').attr('selected','');
-		$("#childlang2 option[value='']").prop("selected", true);
-		$('#childlang2').selectmenu('refresh');
-		$('#childlang1').selectmenu('refresh');
+		//$('#childlang2 option:selected').attr('selected','');
+		//$("#childlang2 option[value='']").prop("selected", true);
+		//$('#childlang2').selectmenu('refresh');
+		//$('#childlang1').selectmenu('refresh');
   }else{
 		$('#demo_edit_parent1phone_ext').html(html2);
 		$('#demo_edit_parent2phone_ext').html(html2);
 		
-		$('#edit_childlang1').html(html1);
-		$('#edit_childlang2').html(html3);
+		$('#demo_edit_childlang1').html(html1);
+		$('#demo_edit_childlang2').html(html3);
 		
   }
 	
@@ -413,6 +417,59 @@ function loadnationalityJson(mode){
          });
 			$('#demo_parent2phone_ext' + '_dummy').val("+"+selectedExtension);
 			$('#parent2phone_ext').val(selectedExtension);
+			
+			
+			$('#demo_childlang1').scroller().image({
+                theme: 'ios',
+                display: 'bottom',
+                mode: 'scroller',
+                labels: ['Make'],
+                inputClass: 'i-txt',
+					 onSelect: function(valueText, inst){
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("##");
+						
+						$('#demo_childlang1' + '_dummy').val(selectedvalArr[1]);
+						$('#childlang1').val(selectedvalArr[0]);
+						lang1selected(selectedvalArr[0],'add');
+					 }
+         });
+			$('#demo_childlang1' + '_dummy').val(selectedLanguage);
+			$('#childlang1').val(selectedLanguageCode);
+			
+			$('#demo_childlang2').scroller().image({
+                theme: 'ios',
+                display: 'bottom',
+                mode: 'scroller',
+                labels: ['Make'],
+                inputClass: 'i-txt',
+					 onSelect: function(valueText, inst){
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("##");
+						
+						$('#demo_childlang2' + '_dummy').val(selectedvalArr[1]);
+						$('#childlang2').val(selectedvalArr[0]);
+					 }
+         });
+			$('#demo_childlang2' + '_dummy').val("");
+			$('#childlang2').val("");
+			
+			$('#demo_blood').scroller().image({
+                theme: 'ios',
+                display: 'bottom',
+                mode: 'scroller',
+                labels: ['Make'],
+                inputClass: 'i-txt',
+					 onSelect: function(valueText, inst){
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("##");
+						
+						$('#demo_blood' + '_dummy').val(selectedvalArr[1]);
+						$('#blood').val(selectedvalArr[0]);
+					 }
+         });
+			$('#demo_blood' + '_dummy').val("A+");
+			$('#blood').val("A+");
 	}else{
 		var curr = new Date().getFullYear();
 			var opt = {
@@ -480,31 +537,111 @@ function loadnationalityJson(mode){
          });
 			$('#demo_edit_parent2phone_ext' + '_dummy').val("+"+nationality[0][2]);
 			$('#edit_parent2phone_ext').val(nationality[0][2]);
+			
+			$('#demo_edit_childlang1').scroller().image({
+                theme: 'ios',
+                display: 'bottom',
+                mode: 'scroller',
+                labels: ['Make'],
+                inputClass: 'i-txt',
+					 onSelect: function(valueText, inst){
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("##");
+						
+						$('#demo_edit_childlang1' + '_dummy').val(selectedvalArr[1]);
+						$('#edit_childlang1').val(selectedvalArr[0]);
+						lang1selected(selectedvalArr[0],'add');
+					 }
+         });
+			$('#demo_edit_childlang1' + '_dummy').val(selectedLanguage);
+			$('#edit_childlang1').val(selectedLanguageCode);
+			
+			$('#demo_edit_childlang2').scroller().image({
+                theme: 'ios',
+                display: 'bottom',
+                mode: 'scroller',
+                labels: ['Make'],
+                inputClass: 'i-txt',
+					 onSelect: function(valueText, inst){
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("##");
+						
+						$('#demo_edit_childlang2' + '_dummy').val(selectedvalArr[1]);
+						$('#edit_childlang2').val(selectedvalArr[0]);
+					 }
+         });
+			$('#demo_edit_childlang2' + '_dummy').val("");
+			$('#edit_childlang2').val("");
+			
+			$('#demo_edit_blood').scroller().image({
+                theme: 'ios',
+                display: 'bottom',
+                mode: 'scroller',
+                labels: ['Make'],
+                inputClass: 'i-txt',
+					 onSelect: function(valueText, inst){
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("##");
+						
+						$('#demo_edit_blood' + '_dummy').val(selectedvalArr[1]);
+						$('#edit_blood').val(selectedvalArr[0]);
+					 }
+         });
+			$('#demo_edit_blood' + '_dummy').val("A+");
+			$('#edit_blood').val("A+");
 	}
 }
 
 function lang1selected(val,mode){
   var html1 = '';
   var html3 = '';
-  html3+='<option value=""></option>';
+  html3+='<li data-val="##"><div class="car"><span>&nbsp;</span></div></li>';
 	for(x=0;x<languages.length;x++){
 		if(typeof(languages[x][0]) != 'undefined') {
-				html1+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';
 			if(val != languages[x][0]){
-				html3+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';	
+				html3+='<li data-val="'+languages[x][0]+'##'+languages[x][1]+'"><div class="car"><span>'+languages[x][1]+'</span></div></li>';	
+				//html3+='<option value="'+languages[x][0]+'" data-image="images/flags-pack/flag_'+languages[x][0].toLowerCase()+'.png" data-imagecss="flag '+languages[x][0]+'" data-title="'+languages[x][1]+'">'+languages[x][1]+'</option>';	
 			}
 		}
 	}
   
   if(mode == 'add'){
-		$('#childlang2').html(html3);
-		$('#childlang2 option:selected').attr('selected','');
-		$("#childlang2 option[value='']").prop("selected", true);
-		$('#childlang2').selectmenu('refresh');
+			$('#demo_childlang2').html(html3);
+			$('#demo_childlang2').scroller().image({
+                theme: 'ios',
+                display: 'bottom',
+                mode: 'scroller',
+                labels: ['Make'],
+                inputClass: 'i-txt',
+					 onSelect: function(valueText, inst){
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("##");
+						
+						$('#demo_childlang2' + '_dummy').val(selectedvalArr[1]);
+						$('#childlang2').val(selectedvalArr[0]);
+					 }
+         });
+			$('#demo_childlang2' + '_dummy').val("");
+			$('#childlang2').val("");
 		
   }else{
-		$('#edit_childlang2').html(html3);
-		$('#edit_childlang2').selectmenu('refresh');
+			$('#demo_edit_childlang2').html(html3);
+			$('#demo_edit_childlang2').scroller().image({
+                theme: 'ios',
+                display: 'bottom',
+                mode: 'scroller',
+                labels: ['Make'],
+                inputClass: 'i-txt',
+					 onSelect: function(valueText, inst){
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("##");
+						
+						$('#demo_edit_childlang2' + '_dummy').val(selectedvalArr[1]);
+						$('#edit_childlang2').val(selectedvalArr[0]);
+					 }
+         });
+			$('#demo_edit_childlang2' + '_dummy').val("");
+			$('#edit_childlang2').val("");
 		
   }
 }
@@ -858,24 +995,29 @@ function editDetail(){
 				}
 				
 				var clang1 = '';
+				var clang1txt = '';
 				var clang2 = '';
+				var clang2txt = '';
+				
 				for(i=0;i<languages.length;i++){
 					if(languages[i][0] == x.childlang1){
-						clang1 = languages[i][1];
+						clang1 = languages[i][0];
+						clang1txt = languages[i][1];
 					}
 					if(languages[i][0] == x.childlang2){
-						clang2= languages[i][1];
+						clang2 = languages[i][0];
+						clang2txt = languages[i][1];
 					}
 				}
 				
-				$('#edit_parent1phone_ext').selectmenu();
-				$('#edit_parent1phone_ext option:selected').attr('selected','');
-				$('#edit_parent1phone_ext option:contains("+'+cphoneext+'")').prop('selected', true);
-				$('#edit_parent1phone_ext').selectmenu('refresh');
+				//$('#edit_parent1phone_ext').selectmenu();
+				//$('#edit_parent1phone_ext option:selected').attr('selected','');
+				//$('#edit_parent1phone_ext option:contains("+'+cphoneext+'")').prop('selected', true);
+				//$('#edit_parent1phone_ext').selectmenu('refresh');
 				
-				$('#edit_parent2phone_ext').selectmenu();
-				$('#edit_parent2phone_ext option:contains("+'+cphoneext+'")').prop('selected', true);
-				$('#edit_parent2phone_ext').selectmenu('refresh');
+				//$('#edit_parent2phone_ext').selectmenu();
+				//$('#edit_parent2phone_ext option:contains("+'+cphoneext+'")').prop('selected', true);
+				//$('#edit_parent2phone_ext').selectmenu('refresh');
 				
 				$('#demo_edit_childnation' + '_dummy').val(cnation);
 				$('#edit_childnation').val(x.childnation);
@@ -887,21 +1029,32 @@ function editDetail(){
 				$('#edit_parent2phone_ext').val(cphoneext);
 			
 				
-				$('#edit_childlang1').selectmenu();
-				$('#edit_childlang1 option:selected').attr('selected','');
-				$("#edit_childlang1 option[value='"+x.childlang1+"']").prop("selected", true);
-				$('#edit_childlang1').selectmenu('refresh');
+				$('#demo_edit_childlang1' + '_dummy').val(clang1txt);
+				$('#edit_childlang1').val(clang1);
 				
-				$('#edit_childlang2').selectmenu();
-				$('#edit_childlang2 option:selected').attr('selected','');
-				$("#edit_childlang2 option[value='"+x.childlang2+"']").prop("selected", true);
-				$('#edit_childlang2').selectmenu('refresh');
+				$('#demo_edit_childlang2' + '_dummy').val(clang2txt);
+				$('#edit_childlang2').val(clang2);
 				
-				$('#edit_blood').selectmenu();
-				$('#edit_blood option:selected').attr('selected','');
+				$('#demo_edit_blood' + '_dummy').val(x.blood);
+				$('#edit_blood').val(x.blood);
+				
+				//$('#edit_childlang1').selectmenu();
+				//$('#edit_childlang1 option:selected').attr('selected','');
+				//$("#edit_childlang1 option[value='"+x.childlang1+"']").prop("selected", true);
+				//$('#edit_childlang1').selectmenu('refresh');
+				
+				//$('#edit_childlang2').selectmenu();
+				//$('#edit_childlang2 option:selected').attr('selected','');
+				//$("#edit_childlang2 option[value='"+x.childlang2+"']").prop("selected", true);
+				//$('#edit_childlang2').selectmenu('refresh');
+				
+				//$('#edit_blood').selectmenu();
+				//$('#edit_blood option:selected').attr('selected','');
 				//$('#edit_blood option:contains("+'+x.blood+'")').prop('selected', true);
-				$("#edit_blood option[value='"+x.blood+"']").prop("selected", true);
-				$('#edit_blood').selectmenu('refresh');
+				//$("#edit_blood option[value='"+x.blood+"']").prop("selected", true);
+				//$('#edit_blood').selectmenu('refresh');
+				
+				
 				
 				$('#edit_childname').val(x.childname);
 				$('#edit_childsurname').val(x.childsurname);

@@ -135,16 +135,28 @@
 						  <div class="formfields">
 								<label for="childlang1"><span class="i18n" data-i18n="[html]example:text22"></span></label>
 								
-								
-								<select name="childlang1" id="childlang1" onchange="lang1selected(this.value,'add');" >
+								<span style="display: none;">
+									 <input type="text" name="childlang1" id="childlang1" value="">
+								</span>
+								<span class="ui-icon ui-icon-arrow-d ui-icon-shadow custom_ui_icon">&nbsp;</span>
+								<ul id="demo_childlang1">
+								</ul>
+								<!--<select name="childlang1" id="childlang1" onchange="lang1selected(this.value,'add');" >
 									 
-								</select>
+								</select>-->
 						  </div>
 						  <div class="formfields">
 								<label for="childlang2"><span class="i18n" data-i18n="[html]example:text57"></span></label>
+								<span style="display: none;">
+									 <input type="text" name="childlang2" id="childlang2" value="">
+								</span>
+								<span class="ui-icon ui-icon-arrow-d ui-icon-shadow custom_ui_icon">&nbsp;</span>
+								<ul id="demo_childlang2">
+								</ul>
+								<!--
 								<select name="childlang2" id="childlang2">
 									 
-								</select>
+								</select>-->
 						  </div>					
 						  <div class="formfields">
 								<label for="parent1name"><span class="i18n" data-i18n="[html]example:text39"></span></label>
@@ -205,16 +217,31 @@
 						  </div>
 						  <div class="formfields">
 								<label for="blood"><span class="i18n" data-i18n="[html]example:text47"></span></label>
+								<span style="display: none;">
+									 <input type="text" name="blood" id="blood" value="">
+								</span>
+								<span class="ui-icon ui-icon-arrow-d ui-icon-shadow custom_ui_icon">&nbsp;</span>
+								<ul id="demo_blood">
+									<li data-val="A+##A+"><div class="car"><span>A+</span></div></li>
+									<li data-val="A##A"><div class="car"><span>A</span></div></li>
+									<li data-val="B+##B+"><div class="car"><span>B+</span></div></li>
+									<li data-val="B##B"><div class="car"><span>B</span></div></li>
+									<li data-val="AB+##AB+"><div class="car"><span>AB+</span></div></li>
+									<li data-val="AB##AB"><div class="car"><span>AB</span></div></li>
+									<li data-val="O+##O+"><div class="car"><span>O+</span></div></li>
+									<li data-val="O-##O-"><div class="car"><span>O-</span></div></li>	  
+								</ul>
+								<!--
 								<select name="blood" id="blood">
 									 <option value="A+">A+</option>
 									 <option value="A-">A-</option>
 									 <option value="B+">B+</option>
-                   <option value="B-">B-</option>
+									 <option value="B-">B-</option>
 									 <option value="AB+">AB+</option>
 									 <option value="AB-">AB-</option>
-                   <option value="O+">O+</option>
+									 <option value="O+">O+</option>
 									 <option value="O-">O-</option>
-								</select>
+								</select>-->
 						  </div>
 						  <div class="formfields">
 								<label for="medical"><span class="i18n" data-i18n="[html]example:text48"></span></label>
@@ -441,16 +468,30 @@
 						  </div>
 						  <div class="formfields">
 								<label for="edit_childlang1"><span class="i18n" data-i18n="[html]example:text22"></span></label>
-								<select name="childlang1" id="edit_childlang1" onchange="lang1selected(this.value,'edit');" >
+								
+								<span style="display: none;">
+									 <input type="text" name="edit_childlang1" id="edit_childlang1" value="">
+								</span>
+								<span class="ui-icon ui-icon-arrow-d ui-icon-shadow custom_ui_icon">&nbsp;</span>
+								<ul id="demo_edit_edit_childlang1">
+								</ul>
+								<!--<select name="childlang1" id="childlang1" onchange="lang1selected(this.value,'add');" >
 									 
-								</select>
+								</select>-->
 						  </div>
 						  <div class="formfields">
 								<label for="edit_childlang2"><span class="i18n" data-i18n="[html]example:text57"></span></label>
-								<select name="childlang2" id="edit_childlang2">
+								<span style="display: none;">
+									 <input type="text" name="edit_childlang2" id="edit_childlang2" value="">
+								</span>
+								<span class="ui-icon ui-icon-arrow-d ui-icon-shadow custom_ui_icon">&nbsp;</span>
+								<ul id="demo_edit_edit_childlang2">
+								</ul>
+								<!--
+								<select name="childlang2" id="childlang2">
 									 
-								</select>
-						  </div>					
+								</select>-->
+						  </div>
 						  <div class="formfields">
 								<label for="edit_parent1name"><span class="i18n" data-i18n="[html]example:text39"></span></label>
 								<input type="text" name="parent1name" id="edit_parent1name" value="">
@@ -510,6 +551,22 @@
 						  </div>
 						  <div class="formfields">
 								<label for="edit_blood"><span class="i18n" data-i18n="[html]example:text47"></span></label>
+								
+								<span style="display: none;">
+									 <input type="text" name="edit_blood" id="edit_blood" value="">
+								</span>
+								<span class="ui-icon ui-icon-arrow-d ui-icon-shadow custom_ui_icon">&nbsp;</span>
+								<ul id="demo_edit_blood">
+									<li data-val="A+##A+"><div class="car"><span>A+</span></div></li>
+									<li data-val="A##A"><div class="car"><span>A</span></div></li>
+									<li data-val="B+##B+"><div class="car"><span>B+</span></div></li>
+									<li data-val="B##B"><div class="car"><span>B</span></div></li>
+									<li data-val="AB+##AB+"><div class="car"><span>AB+</span></div></li>
+									<li data-val="AB##AB"><div class="car"><span>AB</span></div></li>
+									<li data-val="O+##O+"><div class="car"><span>O+</span></div></li>
+									<li data-val="O-##O-"><div class="car"><span>O-</span></div></li>	  
+								</ul>
+								<!--
 								<select name="blood" id="edit_blood">
 									 <option value="A+">A+</option>
 									 <option value="A-">A-</option>
@@ -519,7 +576,7 @@
 									 <option value="AB-">AB-</option>
 									 <option value="O+">O+</option>
 									 <option value="O-">O-</option>
-								</select>
+								</select>-->
 						  </div>
 						  <div class="formfields">
 								<label for="edit_medical"><span class="i18n" data-i18n="[html]example:text48"></span></label>
