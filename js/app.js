@@ -157,9 +157,13 @@ var app = {
 
 function getBarCodedetails(surl){
 	if(surl == ''){
-		surl = 'http://www.childrenfinder.com/123456';	
+		//surl = 'http://www.childrenfinder.com/123456';	
 	}
-	
+	if(surl == ''){
+		alert("Did not get any qrcode code");
+		$.mobile.loading('hide');
+		return false;
+	}
 	var sUrlArr  = surl.split("/");
 	var surllength =  parseInt(sUrlArr.length)-1;
 	var laststring = sUrlArr[surllength];
@@ -202,7 +206,12 @@ function qrcode_identify(surl){
 	var surllength =  parseInt(sUrlArr.length)-1;
 	var laststring = sUrlArr[surllength];
 	number = laststring;
-	
+	if(number == ''){
+    alert("Did not get proper QRCode to get the bracelet code.");
+	 $.mobile.loading('hide');
+    return false;
+   }
+  
 	var url = website+number
 	window.plugins.childBrowser.showWebPage(url,{ showLocationBar: true });
 	$.mobile.loading('hide');
