@@ -139,9 +139,9 @@ var app = {
 		  
     },
 	 backCallback: function(){
-			alert("as");
+			//alert("as");
 			var activePage = $.mobile.activePage[0].id;
-			alert(activePage);
+			//alert(activePage);
 			if(activePage == 'home' || activePage == 'registeredBracelet'){
 				return false;
 			}else{
