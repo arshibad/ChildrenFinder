@@ -3,7 +3,7 @@ var url = "http://fatbraindev.somee.com/DeviceGateway.aspx";
 var website = 'http://fatbraindev.somee.com/';
 //url = encodeURIComponent(url);
 
-var browser  = 'no';
+var browser  = 'yes';
 
 if(browser == 'yes'){
 	url = encodeURIComponent(url);
@@ -235,6 +235,8 @@ function submitpassword(){
 							$.mobile.loading('hide');
 							changepage('fillInfo');
 							loadnationalityJson('add');
+							resetForms();
+							
 						}else if(data.rc == 1){
 							alert("Error, bracelet code is not valid");
 							$.mobile.loading('hide');
@@ -252,6 +254,26 @@ function submitpassword(){
 			$.mobile.loading('hide');
 		 }
        });
+}
+
+function resetForms(){
+	$('#childname').val('');
+	$('#childsurname').val('');
+	$('#demo_childlang1' + '_dummy').val('');
+	$('#childlang1').val('');
+	
+	$('#parent1name').val('');
+	$('#parent1surname').val('');
+	$('#parent1phone').val('');
+	$('#parent2phone').val('');
+	$('#accom').val('');
+	$('#allergies').val('');
+	$('#blood').val('');
+	$('#demo_blood' + '_dummy').val('');
+	$('#medical').val('');
+	$('#message').val('');
+	$('#deleteafter').val('');
+	
 }
 
 
@@ -399,7 +421,15 @@ function loadnationalityJson(mode){
 				 mode: 'scroller',
 				 lang: 'en',
 				 display: 'bottom',
-				 animate: 'slideup'
+				 animate: 'slideup',
+				 onSelect: function(valueText, inst){
+						console.log(valueText);
+						console.log(inst);
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("/");
+						var dd = selectedvalArr[2]+"-"+selectedvalArr[1]+"-"+selectedvalArr[0];
+						$('#deleteafter').val(dd);
+				}
 			}));
 			$('.demo').hide();
 			
@@ -508,7 +538,7 @@ function loadnationalityJson(mode){
 			var opt = {
 				 'date': {
 					  preset: 'date',
-					  dateOrder: 'd Dmmyy'
+					  dateOrder: 'YYYYMMd'
 				 }
 			}
 			var demo = 'date';
@@ -519,7 +549,15 @@ function loadnationalityJson(mode){
 				 mode: 'scroller',
 				 lang: 'en',
 				 display: 'bottom',
-				 animate: 'slideup'
+				 animate: 'slideup',
+				 onSelect: function(valueText, inst){
+						console.log(valueText);
+						console.log(inst);
+						var selectedval = valueText;
+						selectedvalArr  = selectedval.split("/");
+						var dd = selectedvalArr[2]+"-"+selectedvalArr[1]+"-"+selectedvalArr[0];
+						$('#edit_deleteafter').val(dd);
+				}
 			}));
 			$('.demo').hide();
 			
