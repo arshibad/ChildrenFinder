@@ -3,7 +3,7 @@ var url = "http://fatbraindev.somee.com/DeviceGateway.aspx";
 var website = 'http://fatbraindev.somee.com/';
 //url = encodeURIComponent(url);
 
-var browser  = 'no';
+var browser  = 'yes';
 
 if(browser == 'yes'){
 	url = encodeURIComponent(url);
@@ -859,7 +859,7 @@ function registeredBreacelet(){
 			for(i=0;i<results.rows.length;i++){
 				var x;
 				x = results.rows.item(i);
-				html+='<a href="javascript:void(0);" onclick="chooseCurrentBracelet('+x.id+');" class="blackhref"><div class="listfields"><div class="label">'+x.childname+'\'s bracelet</div><div class="value"><span>>></span></div></div></a>';
+				html+='<a onclick="chooseCurrentBracelet('+x.id+');" class="blackhref"><div class="listfields"><div class="label">'+x.childname+'\'s bracelet</div><div class="value"><span>>></span></div></div></a>';
 			}
 			$('#registered_list').html(html);
 			changepage('registeredBracelet');
