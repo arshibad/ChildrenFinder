@@ -410,7 +410,7 @@ function loadnationalityJson(mode){
 			var opt = {
 				 'date': {
 					  preset: 'date',
-					  dateOrder: 'd Dmmyy'
+					  dateOrder: 'YYYYMMd'
 				 }
 			}
 			var demo = 'date';
