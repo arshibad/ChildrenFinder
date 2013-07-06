@@ -83,11 +83,17 @@ $(document).ready(function(){
 	registeredBreacelet();
 });
 
+$(document).bind("mobileinit", function () {
+    $.mobile.defaultPageTransition = "none";
+	 //$.mobile.defaultPageTransition = "slide";
+});
 
 $(document).bind('pageinit', function (event) {
  	i18n.init({ debug: true, resStore: resources }, function () {
         $(".i18n").i18n();
    });
+	
+	
 });
 
 
@@ -770,9 +776,12 @@ function registerNewBracelet(){
 							
 							var sql = 'insert into bracelet (cur_bracelet_code,childname,childsurname,childnation,childlang1,childlang2,parent1name,parent1surname,parent1phone,parent2name,parent2surname,parent2phone,accom,allergies,blood,medical,message ,address,deleteafter) VALUES ("'+cur_bracelet_code+'","'+$('#childname').val()+'","'+$('#childsurname').val()+'","'+nationality+'","'+$('#childlang1').val()+'","'+$('#childlang2').val()+'","'+$('#parent1name').val()+'","'+$('#parent1surname').val()+'","'+$('#parent1phone').val()+'","'+$('#parent2name').val()+'","'+$('#parent2surname').val()+'","'+$('#parent2phone').val()+'","'+$('#accom').val()+'","'+$('#allergies').val()+'","'+$('#blood').val()+'","'+$('#medical').val()+'","'+$('#message').val()+'","","'+$('#deleteafter').val()+'")';
 							executeQuery(sql,function(results){
-								  console.log(results.insertId);
+								  //console.log(results.insertId);
+								  $('#bracelet_numeric_code').val('');
+								  $('#bracelet_password').val('');
 								  alert("OK, message updated successfully");
-								  showBraceletDetail(results.insertId);
+								  //showBraceletDetail(results.insertId);
+								  registeredBreacelet();
 								  return results;
 							},function(error){
 								  alert("Error, generic error");
