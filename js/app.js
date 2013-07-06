@@ -238,9 +238,7 @@ function submitpassword(){
 						//console.log(data.rc);
 						if(data.rc == 0){
 							alert("OK, Bracelet activated successfully");
-							$.mobile.loading('hide');
-							changepage('fillInfo');
-							loadnationalityJson('add');
+							
 							resetForms();
 							
 						}else if(data.rc == 1){
@@ -279,7 +277,9 @@ function resetForms(){
 	$('#medical').val('');
 	$('#message').val('');
 	$('#deleteafter').val('');
-	
+	loadnationalityJson('add');
+	changepage('fillInfo');
+	$.mobile.loading('hide');
 }
 
 
