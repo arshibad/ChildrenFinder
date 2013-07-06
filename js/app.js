@@ -277,9 +277,9 @@ function resetForms(){
 	$('#medical').val('');
 	$('#message').val('');
 	$('#deleteafter').val('');
-	loadnationalityJson('add');
 	changepage('fillInfo');
-	$.mobile.loading('hide');
+	loadnationalityJson('add');
+	
 }
 
 
@@ -312,6 +312,7 @@ function changepage(page){
 }
 
 function loadnationalityJson(mode){
+	$.mobile.loading('show');
 	var html = '';
   var html2 = '';
   var html4 = '';
@@ -667,6 +668,7 @@ function loadnationalityJson(mode){
 			$('#demo_edit_blood' + '_dummy').val("A+");
 			$('#edit_blood').val("A+");
 	}
+	$.mobile.loading('hide');
 }
 
 function lang1selected(val,mode){
