@@ -463,17 +463,3 @@ background-color: rgba(0,0,0,0) !important;
 .dww{
     min-width: 100px !important;
 }
-
-.ui-page {
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
-    -moz-backface-visibility:hidden;
-}
-
-div
-{
-backface-visibility:hidden;
--webkit-backface-visibility:hidden; /* Chrome and Safari */
--moz-backface-visibility:hidden; /* Firefox */
-}
-
