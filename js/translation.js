@@ -123,7 +123,7 @@ var resources = {
     },
     it: {
         example: {
-            "text1": "Kids",
+            "text1": "Kid",
             "text2": "back",
             "text3": "New <br />Bracelet",
             "text4": "Registration",

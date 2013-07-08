@@ -464,7 +464,6 @@ background-color: rgba(0,0,0,0) !important;
     min-width: 100px !important;
 }
 
-/*
 .ui-page {
     backface-visibility:hidden;
     -webkit-backface-visibility:hidden;
@@ -474,16 +473,7 @@ background-color: rgba(0,0,0,0) !important;
 div
 {
 backface-visibility:hidden;
--webkit-backface-visibility:hidden;
--moz-backface-visibility:hidden; 
-}
-*/
-.ui-mobile-viewport > div
-{
- display: none; 
+-webkit-backface-visibility:hidden; /* Chrome and Safari */
+-moz-backface-visibility:hidden; /* Firefox */
 }
 
-.ui-mobile-viewport > div.ui-page-active
-{
- display: block;
-}
